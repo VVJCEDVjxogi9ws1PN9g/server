@@ -1,6 +1,5 @@
 const path = require('path');
 const fs = require('fs');
-const https = require('https');
 
 const express = require('express');
 const cors = require('cors');
@@ -8,17 +7,7 @@ const bodyParser = require('body-parser');
 
 const chain = require('./chain');
 
-const HOST_NAME = 'vmine.xyz';
-const HTTPS_PORT = 443;
-const httpsOpts = {
-	cert: fs.readFileSync('./ssl/vmine_xyz.crt'),
-	ca: fs.readFileSync('./ssl/vmine_xyz.ca-bundle'),
-	key: fs.readFileSync('./ssl/vmine_xyz.key')
-};
-
 const app = express();
-const httpsServer = httpsServer.createServer(httpsOpts, app);
-
 app.use(bodyParser.json());
 app.use(cors());
 
@@ -47,8 +36,7 @@ app.post('/select-locations', (req, res) => {
 });
 
 app.use(express.static(path.join(__dirname, 'points4')));
-// app.listen(80, '0.0.0.0');
-httpsServer.listen(HTTPS_PORT, HOST_NAME);
+app.listen(80, '0.0.0.0');
 
 const RATING_BREAKPOINTS = [207974, 516027, 1015195];
 function getRating(id) {
