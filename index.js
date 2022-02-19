@@ -17,7 +17,7 @@ const httpsOpts = {
 };
 
 const app = express();
-const httpsServer = httpsServer.createServer(httpsOpts, app);
+const httpsServer = https.createServer(httpsOpts, app);
 
 app.use(bodyParser.json());
 app.use(cors());
